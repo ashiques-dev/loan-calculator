@@ -148,7 +148,7 @@ export const MoneyConverter = () => {
       await changeCurrency(currencyCode);
     };
     fetchData();
-  }, [currencyCode, changeCurrency]);
+  }, [currencyCode]);
 
   if (error) {
     return (
