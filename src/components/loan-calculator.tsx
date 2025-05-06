@@ -23,7 +23,24 @@ export const LoanCalculator = () => {
   const { emi, schedule, calculateEMI, resetEMITable } = useEMICalculator();
   return (
     <>
-      <section className="width padding py-14">
+      <motion.section
+        initial={{
+          opacity: 0,
+          y: -100,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.35,
+          ease: "linear",
+        }}
+        viewport={{
+          once: true,
+        }}
+        className="width padding py-14"
+      >
         <h1 className="text-4xl font-semibold leading-none tracking-tight text-center ">
           Loan calculator Dashboard
         </h1>
@@ -32,7 +49,7 @@ export const LoanCalculator = () => {
           loanFormRegister={loanFormRegister}
           calculateEMI={calculateEMI}
         />
-      </section>
+      </motion.section>
       <LoanCalculationTable
         emi={emi}
         schedule={schedule}
@@ -48,7 +65,7 @@ const LoanCalculationTable = ({
   resetEMITable,
 }: TLoanCalculationTable) => {
   const [currencyCode, setCurrencyCode] = useState("USD");
-  const { error, fetchChangedCurrencyData, resposnseData } =
+  const { error, fetchChangedCurrencyData, responseData } =
     useCurrencyChange();
   return (
     <AnimatePresence>
@@ -66,6 +83,9 @@ const LoanCalculationTable = ({
             transition={{
               duration: 0.35,
               ease: "linear",
+            }}
+            viewport={{
+              once: true,
             }}
             className="max-w-2xl mx-auto padding pt-10"
           >
@@ -97,7 +117,7 @@ const LoanCalculationTable = ({
                   <p className="text-base px-2  font-medium">
                     Converted EMI :
                     <span className="text-danger ps-1 underline underline-offset-2">
-                      {Math.floor(resposnseData * Number(emi) * 100) / 100}{" "}
+                      {Math.floor(responseData * Number(emi) * 100) / 100}{" "}
                       {currencyCode}
                     </span>
                   </p>
@@ -133,6 +153,9 @@ const LoanCalculationTable = ({
               duration: 0.35,
               ease: "linear",
             }}
+            viewport={{
+              once: true,
+            }}
             className="width padding overflow-clip flex  justify-center pb-10 pt-6"
           >
             <div className="overflow-x-scroll w-fit">
@@ -161,6 +184,9 @@ const LoanCalculationTable = ({
                         duration: 0.35,
                         ease: "linear",
                       }}
+                      viewport={{
+                        once: true,
+                      }}
                       key={row.month}
                       className="divide-x odd:bg-accent/5"
                     >
@@ -171,7 +197,7 @@ const LoanCalculationTable = ({
                         <p className="space-x-2">
                           <span>
                             {Math.floor(
-                              resposnseData * Number(row.principal) * 100
+                              responseData * Number(row.principal) * 100
                             ) / 100}
                           </span>
                           <span>{currencyCode}</span>
@@ -181,7 +207,7 @@ const LoanCalculationTable = ({
                         <p className="space-x-2">
                           <span>
                             {Math.floor(
-                              resposnseData * Number(row.interest) * 100
+                              responseData * Number(row.interest) * 100
                             ) / 100}
                           </span>
                           <span>{currencyCode}</span>
@@ -191,7 +217,7 @@ const LoanCalculationTable = ({
                         <p className="space-x-2">
                           <span>
                             {Math.floor(
-                              resposnseData * Number(row.balance) * 100
+                              responseData * Number(row.balance) * 100
                             ) / 100}
                           </span>
                           <span>{currencyCode}</span>

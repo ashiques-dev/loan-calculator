@@ -50,13 +50,22 @@ export const useEMICalculator = () => {
 };
 
 export const useCurrencyChange = () => {
-  const [resposnseData, setResponseData] = useState(1);
+  const [responseData, setResponseData] = useState(1);
   const [error, setError] = useState("");
+  const [converted, setconverted] = useState();
 
-  const fetchChangedCurrencyData = async (currencyCode: string) => {
+  const fetchChangedCurrencyData = async (
+    currencyTwo?: string,
+    currencyOne: string = "USD",
+    amount: string = "1"
+  ) => {
     try {
-      const response = await axiosApi.get(`/pair/USD/${currencyCode}/1`);
+      const response = await axiosApi.get(
+        `/pair/${currencyOne}/${currencyTwo}/${amount}`
+      );
+
       setResponseData(response.data.conversion_rate);
+      setconverted(response.data.conversion_result);
       setError("");
     } catch {
       setError("Error fetching data");
@@ -64,8 +73,31 @@ export const useCurrencyChange = () => {
   };
 
   return {
-    resposnseData,
+    responseData,
     error,
     fetchChangedCurrencyData,
+    converted,
+  };
+};
+
+export const useCurrencyConverter = () => {
+  const [responseData, setResponseData] = useState({});
+  const [error, setError] = useState("");
+
+  const changeCurrency = async (currencyCode: string) => {
+    try {
+      const response = await axiosApi.get(`/latest/${currencyCode}`);
+      console.log(response.data);
+      setResponseData(response.data.conversion_rates);
+      setError("");
+    } catch {
+      setError("Error fetching data");
+    }
+  };
+
+  return {
+    responseData,
+    error,
+    changeCurrency,
   };
 };
