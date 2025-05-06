@@ -8,6 +8,7 @@ export type TNavItems = {
   pathname: string;
   className?: string;
   forMobile?: boolean;
+  mobileNavButtonClick?: () => void;
 };
 
 export type TMobileNavMenu = {

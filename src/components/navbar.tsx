@@ -72,6 +72,7 @@ const NavItems = ({
   pathname,
   className,
   forMobile,
+  mobileNavButtonClick,
 }: TNavItems) => {
   return (
     <div className={className}>
@@ -81,6 +82,9 @@ const NavItems = ({
           key={label}
           variant={"link"}
           onClick={() => {
+            if (mobileNavButtonClick) {
+              mobileNavButtonClick();
+            }
             router.push(link);
           }}
           initial={{
@@ -95,7 +99,7 @@ const NavItems = ({
           }}
           transition={{
             duration: 0.3 * index,
-            ease:'linear'
+            ease: "linear",
           }}
           viewport={{
             once: !forMobile ? true : false,
@@ -149,6 +153,7 @@ const MobileNavMenu = ({
               forMobile
               router={router}
               pathname={pathname}
+              mobileNavButtonClick={mobileNavButtonClick}
               className="flex flex-col gap-6 items-start place-self-center pt-6"
             />
           </div>
