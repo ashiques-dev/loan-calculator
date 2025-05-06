@@ -35,7 +35,7 @@
 
   --color-accent: var(--accent);
   --color-border: var(--border);
-  
+
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-danger: var(--danger);
@@ -67,5 +67,28 @@
   }
   button {
     @apply cursor-pointer disabled:cursor-not-allowed;
+  }
+}
+
+@layer components {
+  .padding {
+    @apply px-4 md:px-8 lg:px-10;
+  }
+  .width {
+    @apply max-w-6xl mx-auto w-[97%];
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    appearance: none;
+    -ms-appearance: none;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
