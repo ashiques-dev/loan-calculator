@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #fafafa;
+  --foreground: #0c0a09;
+
+  --accent: #44403c;
+  --border: #d4d4d4;
+
+  --primary: #2563eb;
+  --secondary: #fafaf9;
+  --danger: #ef4444;
+}
+.dark {
+  --background: #0a0a0a;
+  --foreground: #fafaf9;
+
+  --accent: #d6d3d1;
+  --border: #404040;
+
+  --primary: #3b82f6;
+  --secondary: #fafaf9;
+  --danger: #dc2626;
+}
+
+@theme inline {
+  --font-inter: var(--font-inter);
+
+  --color-*: initial;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-danger: var(--danger);
+
+  --animate-scale-up-down: scale-up-down 0.5s linear;
+  @keyframes scale-up-down {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.5;
+    }
+    75% {
+      transform: scale(1.075);
+      opacity: 0.75;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border focus-visible:outline-none select-none;
+  }
+  body {
+    @apply font-inter bg-background text-foreground text-sm antialiased;
+  }
+  button {
+    @apply cursor-pointer disabled:cursor-not-allowed;
+  }
+}
